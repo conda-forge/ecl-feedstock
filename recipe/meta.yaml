@@ -15,9 +15,12 @@ source:
     - write_error.patch
     # https://gitlab.com/embeddable-common-lisp/ecl/commit/6be9cb9dee2fc8df59604aa28413625898e70945.patch
     - fix_osx_runtime_path.patch
+    # Backport changes from upstream to the atan implementation--this fixes a
+    # bug that turns up in maxima.
+    - atan.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
