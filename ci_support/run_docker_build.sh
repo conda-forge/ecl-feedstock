@@ -40,6 +40,7 @@ conda clean --lock
 
 conda install --yes --quiet conda-forge-build-setup
 source run_conda_forge_build_setup
+conda update -n root --yes --quiet conda-build
 
 # Embarking on 1 case(s).
     conda build /recipe_root --quiet || exit 1
