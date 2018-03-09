@@ -18,9 +18,14 @@ source:
     # Backport changes from upstream to the atan implementation--this fixes a
     # bug that turns up in maxima.
     - atan.patch
+    # Backport from upstream to "Prevent busy loop during ECL interpreter
+    # shutdown on Cygwin" (for Sage)
+    - 47b1e98272b6.patch
+    # Backport to work around https://trac.sagemath.org/ticket/23011 in Sage
+    - 0c9e67345c36.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [win]
 
 requirements:
@@ -54,3 +59,4 @@ extra:
   recipe-maintainers:
     - isuruf
     - embray
+    - saraedum
