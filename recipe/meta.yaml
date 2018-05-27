@@ -25,20 +25,21 @@ source:
     - 0c9e67345c36.patch
 
 build:
-  number: 4
+  number: 5
   skip: true  # [win]
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
     - libtool
-    - gmp >=5.0.1,<7
-    - readline 6.2*
+  host:
+    - gmp
+    - readline
     - bdw-gc
   run:
-    - gmp >=5.0.1,<7
-    - readline 6.2*
-    - bdw-gc
+    - gmp
+    - readline
+    - {{ pin_compatible('bdw-gc') }}
 
 test:
   commands:
