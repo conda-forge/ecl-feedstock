@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tgz
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: 76a585c616e8fa83a6b7209325a309da5bc0ca68e0658f396f49955638111254
+  sha256: 2d482b1a0a4fbd5d881434517032279d808cb6405e22dd91ef6d733534464b99
   patches:
     # Patch from https://github.com/sagemath/sage
     # Ignore write errors to stderr to avoid an infinite loop
