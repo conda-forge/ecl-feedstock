@@ -8,11 +8,9 @@ Subject: [PATCH] osx: fix #343 runtime path
  src/configure  | 4 ++--
  2 files changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/src/aclocal.m4 b/src/aclocal.m4
-index e8f4b8e..bb42eb4 100644
---- a/src/aclocal.m4
-+++ b/src/aclocal.m4
-@@ -402,7 +402,7 @@ case "${host_os}" in
+--- a/ecl-16.1.2/src/aclocal.m4
++++ b/ecl-16.1.2/src/aclocal.m4
+@@ -402,7 +402,7 @@
                  PICFLAG='-fPIC -fno-common'
                  SHARED_LDFLAGS="-dynamiclib -flat_namespace -undefined suppress ${LDFLAGS}"
                  BUNDLE_LDFLAGS="-bundle ${LDFLAGS}"
@@ -21,7 +19,7 @@ index e8f4b8e..bb42eb4 100644
                  THREAD_CFLAGS='-D_THREAD_SAFE'
                  THREAD_LIBS='-lpthread'
                  # The GMP library has not yet been ported to Intel-OSX
-@@ -429,7 +429,7 @@ case "${host_os}" in
+@@ -429,7 +429,7 @@
                    ECL_GC_DIR=bdwgc
                  fi
                  SONAME="${SHAREDPREFIX}ecl.SOVERSION.${SHAREDEXT}"
@@ -30,11 +28,9 @@ index e8f4b8e..bb42eb4 100644
                  ;;
          nsk*)
                  # HP Non-Stop platform
-diff --git a/src/configure b/src/configure
-index 54c3af9..0c6029d 100755
---- a/src/configure
-+++ b/src/configure
-@@ -5032,7 +5032,7 @@ LSP_FEATURES="(cons :android ${LSP_FEATURES})"
+--- a/ecl-16.1.2/src/configure
++++ b/ecl-16.1.2/src/configure
+@@ -5024,7 +5024,7 @@
                  PICFLAG='-fPIC -fno-common'
                  SHARED_LDFLAGS="-dynamiclib -flat_namespace -undefined suppress ${LDFLAGS}"
                  BUNDLE_LDFLAGS="-bundle ${LDFLAGS}"
@@ -43,7 +39,7 @@ index 54c3af9..0c6029d 100755
                  THREAD_CFLAGS='-D_THREAD_SAFE'
                  THREAD_LIBS='-lpthread'
                  # The GMP library has not yet been ported to Intel-OSX
-@@ -5059,7 +5059,7 @@ LSP_FEATURES="(cons :android ${LSP_FEATURES})"
+@@ -5051,7 +5051,7 @@
                    ECL_GC_DIR=bdwgc
                  fi
                  SONAME="${SHAREDPREFIX}ecl.SOVERSION.${SHAREDEXT}"
@@ -52,6 +48,3 @@ index 54c3af9..0c6029d 100755
                  ;;
          nsk*)
                  # HP Non-Stop platform
---
-libgit2 0.24.0
-
