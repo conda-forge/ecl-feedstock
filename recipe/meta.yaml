@@ -23,6 +23,8 @@ source:
     - 47b1e98272b6.patch
     # Backport to work around https://trac.sagemath.org/ticket/23011 in Sage
     - 0c9e67345c36.patch
+    # Do not require .git to be present
+    - tags.patch
 
 build:
   number: 0
