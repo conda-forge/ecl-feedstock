@@ -22,8 +22,8 @@ chmod +x configure
 touch build/TAGS
 
 make
-make check
 make install
+make check
 
 ln -s $PREFIX/lib/ecl-* $PREFIX/lib/ecl
 ln -s $PREFIX/include/ecl $PREFIX/lib/ecl/ecl
