@@ -1,0 +1,17 @@
+--- a/ecl-16.1.2/src/Makefile.in
++++ b/ecl-16.1.2/src/Makefile.in
+@@ -265,11 +265,12 @@
+ 	./ecl compile
+ 	-for i in lsp clos cmp clx tk; do test -d $$i && diff --exclude=\*.o $$i stage2/$$i; done | less
+ 
++.git/tags:
++	( cd $(srcdir)/../.git && which ctags && ctags -f tags -R --langmap=c:+.d ../src ) || echo "tags generation failed. but this does not break the build."
++
+ # Make sure to also include *.d files; and match DPP's idiosyncracies
+ # like "@si::foo" and "@(defun si::foo".
+ # This rule is allowed to fail when etags does not exist.
+-.git/tags:
+-	cd $(srcdir)/../.git && ctags -o tags -R --langmap=c:+.d ../src || true
+ TAGS:
+ 	-if test "x$(ETAGS)" != "x"; then \
+ 	srcfiles=`find $(srcdir)/c $(srcdir)/h -name '*.[chd]'` && \

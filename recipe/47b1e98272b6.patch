@@ -8,19 +8,14 @@ Subject: [PATCH] In `flisten` check that the stream is not in an error state, as
  src/c/file.d | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/c/file.d b/src/c/file.d
-index 0f739b0..2122485 100755
---- a/src/c/file.d
-+++ b/src/c/file.d
-@@ -5314,7 +5314,7 @@ static int
+--- a/ecl-16.1.2/src/c/file.d
++++ b/ecl-16.1.2/src/c/file.d
+@@ -5317,7 +5317,7 @@
  flisten(cl_object stream, FILE *fp)
  {
-   int aux;
--  if (feof(fp))
+         int aux;
+-        if (feof(fp))
 +  if (feof(fp) || ferror(fp))
-     return ECL_LISTEN_EOF;
+                 return ECL_LISTEN_EOF;
  #ifdef FILE_CNT
-   if (FILE_CNT(fp) > 0)
---
-libgit2 0.26.0
-
+         if (FILE_CNT(fp) > 0)

@@ -1,4 +1,4 @@
-{% set version = "16.1.3" %}
+{% set version = "16.1.2" %}
 {% set name = "ecl" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tgz
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: 76a585c616e8fa83a6b7209325a309da5bc0ca68e0658f396f49955638111254
+  sha256: 2d482b1a0a4fbd5d881434517032279d808cb6405e22dd91ef6d733534464b99
   patches:
     # Patch from https://github.com/sagemath/sage
     # Ignore write errors to stderr to avoid an infinite loop
@@ -23,9 +23,11 @@ source:
     - 47b1e98272b6.patch
     # Backport to work around https://trac.sagemath.org/ticket/23011 in Sage
     - 0c9e67345c36.patch
+    # Do not require .git to be present
+    - tags.patch
 
 build:
-  number: 5
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -51,7 +53,7 @@ test:
 about:
   home: https://common-lisp.net/project/ecl
   license: GPLv2+
-  license_file: COPYING
+  license_file: LICENSE
   summary: ECL (Embeddable Common-Lisp) is an interpreter of the Common-Lisp language.
   doc_url: https://common-lisp.net/project/ecl/static/ecldoc/
   dev_url: https://gitlab.com/embeddable-common-lisp/ecl

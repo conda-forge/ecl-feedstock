@@ -10,11 +10,9 @@ builds resulted in 17MB being wasted. The tables need to go only up to
  src/lsp/format.lsp | 49 ++++++++++++++++++++++++++-----------------------
  1 file changed, 26 insertions(+), 23 deletions(-)
 
-diff --git a/src/lsp/format.lsp b/src/lsp/format.lsp
-index 519951d..e02dd74 100644
---- a/src/lsp/format.lsp
-+++ b/src/lsp/format.lsp
-@@ -308,11 +308,13 @@
+--- a/ecl-16.1.2/src/lsp/format.lsp
++++ b/ecl-16.1.2/src/lsp/format.lsp
+@@ -307,11 +307,13 @@
                    :start (format-directive-start struct)
                    :end (format-directive-end struct))))
  
@@ -30,7 +28,7 @@ index 519951d..e02dd74 100644
  
  (defparameter *default-format-error-control-string* nil)
  (defparameter *default-format-error-offset* nil)
-@@ -545,24 +547,24 @@
+@@ -550,24 +552,24 @@
             (write-string directive stream)
             (interpret-directive-list stream (cdr directives) orig-args args))
            (#-ecl format-directive #+ecl vector
@@ -71,7 +69,7 @@ index 519951d..e02dd74 100644
        args))
  
  
-@@ -634,11 +636,12 @@
+@@ -639,11 +641,12 @@
         (values `(write-string ,directive stream)
                 more-directives))
        (format-directive
@@ -89,6 +87,3 @@ index 519951d..e02dd74 100644
           (if expander
               (funcall expander directive more-directives)
               (error 'format-error
---
-libgit2 0.26.0
-
