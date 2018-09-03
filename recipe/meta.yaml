@@ -53,7 +53,7 @@ test:
 about:
   home: https://common-lisp.net/project/ecl
   license: GPLv2+
-  license_file: COPYING
+  license_file: LICENSE
   summary: ECL (Embeddable Common-Lisp) is an interpreter of the Common-Lisp language.
   doc_url: https://common-lisp.net/project/ecl/static/ecldoc/
   dev_url: https://gitlab.com/embeddable-common-lisp/ecl
