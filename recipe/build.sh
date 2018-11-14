@@ -10,6 +10,12 @@ then
     export CFLAGS="-Wno-unknown-attributes $CFLAGS"
 fi
 
+if [ "$(uname)" == "Linux" ]
+then
+   export LDFLAGS="$LDFLAGS -Wl,-rpath-link,${PREFIX}/lib"
+fi
+
+
 chmod +x configure
 ./configure \
         --prefix="$PREFIX" \
