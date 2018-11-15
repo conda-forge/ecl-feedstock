@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# avoid absolute-paths in compilers
+export CC=$(basename "$CC")
+
 export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
 export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
 export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
