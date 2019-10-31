@@ -3,19 +3,10 @@
 # avoid absolute-paths in compilers
 export CC=$(basename "$CC")
 
-export CPPFLAGS="-I$PREFIX/include $CPPFLAGS"
-export LDFLAGS="-L$PREFIX/lib $LDFLAGS"
-export LD_LIBRARY_PATH="$PREFIX/lib:$LD_LIBRARY_PATH"
-export CFLAGS="-g -O2 $CFLAGS"
+export CFLAGS="-g $CFLAGS"
 
-if [ "$(uname)" == "Darwin" ]
-then
+if [[ "${target_platform}" == osx* ]]; then
     export CFLAGS="-Wno-unknown-attributes $CFLAGS"
-fi
-
-if [ "$(uname)" == "Linux" ]
-then
-   export LDFLAGS="$LDFLAGS -Wl,-rpath-link,${PREFIX}/lib"
 fi
 
 
@@ -30,7 +21,7 @@ chmod +x configure
 # Before running make we touch build/TAGS so its building process is never triggered
 touch build/TAGS
 
-make
+make -j${CPU_COUNT}
 make install
 make check
 
