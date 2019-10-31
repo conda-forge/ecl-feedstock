@@ -17,3 +17,5 @@ pin_run_as_build:
     max_pin: x
 readline:
 - '8.0'
+target_platform:
+- linux-64
