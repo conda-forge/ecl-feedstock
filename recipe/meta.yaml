@@ -23,6 +23,7 @@ requirements:
     - gmp
     - readline
     - bdw-gc
+    - texinfo
   run:
     - gmp
     - readline
