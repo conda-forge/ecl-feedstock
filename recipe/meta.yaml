@@ -1,4 +1,4 @@
-{% set version = "20.4.24" %}
+{% set version = "21.2.1" %}
 {% set name = "ecl" %}
 
 package:
@@ -6,12 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tgz
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: 670838edf258a936b522fdb620da336de7e575aa0d27e34841727252726d0f07
+  sha256: b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
