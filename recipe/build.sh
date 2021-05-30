@@ -18,6 +18,7 @@ fi
 if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
   if [[ "$target_platform" == "osx-arm64" ]]; then
     cp src/util/iOS-arm64.cross_config cross_config
+    cp src/util/iOS-arm64.cross_config src/cross_config
   fi
 fi
 
