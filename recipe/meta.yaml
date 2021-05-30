@@ -15,10 +15,12 @@ build:
 
 requirements:
   build:
+    - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - libtool
     - make
     - texinfo
+    - ecl  # [build_platform != target_platform]
   host:
     - gmp
     - readline
