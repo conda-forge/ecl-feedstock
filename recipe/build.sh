@@ -42,3 +42,7 @@ make install
 
 ln -s $PREFIX/lib/ecl-* $PREFIX/lib/ecl
 ln -s $PREFIX/include/ecl $PREFIX/lib/ecl/ecl
+
+cat $SRC_DIR/build/cmp/cmpdefs.lsp
+mkdir -p $PREFIX/share/ecl
+sed "s/defvar/defparameter/g" $SRC_DIR/build/cmp/cmpdefs.lsp > $PREFIX/share/ecl/cmpdefs.lsp

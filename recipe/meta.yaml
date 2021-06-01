@@ -10,7 +10,7 @@ source:
   sha256: b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -20,6 +20,7 @@ requirements:
     - libtool
     - make
     - texinfo
+    - sed
     - ecl  # [build_platform != target_platform]
   host:
     - gmp
