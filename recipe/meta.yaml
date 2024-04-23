@@ -24,7 +24,11 @@ requirements:
     - make
     - texinfo
     - sed
-    - ecl  # [build_platform != target_platform]
+    # We (typically) need a compatible version of ecl when cross-compiling ecl.
+    # On a major upgrade, this cannot be satisfied. When this fails, we merge
+    # the PR that builds the native ecl and then restart the CI once the native
+    # versions are uploaded.
+    - ecl 23.*  # [build_platform != target_platform]
   host:
     - gmp
     - readline
