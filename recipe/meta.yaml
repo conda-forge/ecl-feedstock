@@ -1,4 +1,4 @@
-{% set version = "21.2.1" %}
+{% set version = "23.9.9" %}
 {% set name = "ecl" %}
 
 package:
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: b15a75dcf84b8f62e68720ccab1393f9611c078fcd3afdd639a1086cad010900
+  sha256: c51bdab4ca6c1173dd3fe9cfe9727bcefb97bb0a3d6434b627ca6bdaeb33f880
   patches:
     # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
     - write_error.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [win]
 
 requirements:
@@ -24,7 +24,11 @@ requirements:
     - make
     - texinfo
     - sed
-    - ecl  # [build_platform != target_platform]
+    # We (typically) need a compatible version of ecl when cross-compiling ecl.
+    # On a major upgrade, this cannot be satisfied. When this fails, we merge
+    # the PR that builds the native ecl and then restart the CI once the native
+    # versions are uploaded.
+    - ecl 23.*  # [build_platform != target_platform]
   host:
     - gmp
     - readline
