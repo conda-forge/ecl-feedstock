@@ -11,6 +11,7 @@ source:
   patches:
     # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
     - write_error.patch
+    - fix-prefix.patch
 
 build:
   number: 1
