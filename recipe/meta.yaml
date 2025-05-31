@@ -41,9 +41,9 @@ requirements:
 
 test:
   commands:
-    - if not exist %PREFIX%\bin\ecl.exe exit 1  # [win]
-    - if not exist %PREFIX%\include\{{ name }}\{{ name }}.h exit 1  # [win]
-    - if not exist %PREFIX%\lib\ecl.lib exit 1  # [win]
+    - if not exist %PREFIX%\{{ name }}.exe exit 1  # [win]
+    - if not exist %PREFIX%\{{ name }}\{{ name }}.h exit 1  # [win]
+    - if not exist %PREFIX%\{{ name }}.lib exit 1  # [win]
     - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h  # [unix]
     - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
