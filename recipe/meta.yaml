@@ -13,18 +13,19 @@ source:
     - write_error.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
 
 requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - libtool
-    - make
-    - texinfo
-    - sed
+    - libtool  # [unix]
+    - make  # [unix]
+    - texinfo  # [unix]
+    - sed  # [unix]
+    - cmake  # [win]
+    - nmake  # [win]
     # We (typically) need a compatible version of ecl when cross-compiling ecl.
     # On a major upgrade, this cannot be satisfied. When this fails, we merge
     # the PR that builds the native ecl and then restart the CI once the native
@@ -40,8 +41,13 @@ requirements:
     - {{ pin_compatible('bdw-gc') }}
 
 test:
-  commands:
-    - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h
+  - package_contents:
+    bin:
+      - ecl
+  - script:
+    - if not exist %PREFIX%\include\{{ name }}\{{ name }}.h exit 1  # [win]
+    - if not exist %PREFIX%\lib\ecl.lib exit 1  # [win]
+    - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h  # [unix]
     - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
     - ecl --version
