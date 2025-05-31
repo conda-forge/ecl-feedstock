@@ -32,11 +32,11 @@ requirements:
     - ecl 24.*  # [build_platform != target_platform]
   host:
     - gmp
-    - readline # [unix]
+    - readline  # [unix]
     - bdw-gc
   run:
     - gmp
-    - readline # [unix]
+    - readline  # [unix]
     - {{ pin_compatible('bdw-gc') }}
 
 test:
