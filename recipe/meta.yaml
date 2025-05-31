@@ -25,7 +25,6 @@ requirements:
     - texinfo  # [unix]
     - sed  # [unix]
     - cmake  # [win]
-    - nmake  # [win]
     # We (typically) need a compatible version of ecl when cross-compiling ecl.
     # On a major upgrade, this cannot be satisfied. When this fails, we merge
     # the PR that builds the native ecl and then restart the CI once the native
@@ -33,11 +32,11 @@ requirements:
     - ecl 24.*  # [build_platform != target_platform]
   host:
     - gmp
-    - readline
+    - readline # [unix]
     - bdw-gc
   run:
     - gmp
-    - readline
+    - readline # [unix]
     - {{ pin_compatible('bdw-gc') }}
 
 test:
