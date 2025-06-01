@@ -11,20 +11,21 @@ source:
   patches:
     # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
     - write_error.patch
+    - fix-prefix.patch
 
 build:
-  number: 0
-  skip: true  # [win]
+  number: 1
 
 requirements:
   build:
     - gnuconfig  # [unix]
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
-    - libtool
-    - make
-    - texinfo
-    - sed
+    - libtool  # [unix]
+    - make  # [unix]
+    - texinfo  # [unix]
+    - sed  # [unix]
+    - cmake  # [win]
     # We (typically) need a compatible version of ecl when cross-compiling ecl.
     # On a major upgrade, this cannot be satisfied. When this fails, we merge
     # the PR that builds the native ecl and then restart the CI once the native
@@ -32,16 +33,19 @@ requirements:
     - ecl 24.*  # [build_platform != target_platform]
   host:
     - gmp
-    - readline
+    - readline  # [unix]
     - bdw-gc
   run:
     - gmp
-    - readline
+    - readline  # [unix]
     - {{ pin_compatible('bdw-gc') }}
 
 test:
   commands:
-    - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h
+    - if not exist %PREFIX%\{{ name }}.exe exit 1  # [win]
+    - if not exist %PREFIX%\{{ name }}\{{ name }}.h exit 1  # [win]
+    - if not exist %PREFIX%\{{ name }}.lib exit 1  # [win]
+    - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h  # [unix]
     - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
     - ecl --version

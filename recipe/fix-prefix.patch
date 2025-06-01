@@ -1,0 +1,51 @@
+From d375131bf8c084433f7f2f913f93087d032ed861 Mon Sep 17 00:00:00 2001
+From: Tobias Diez <code@tobiasdiez.de>
+Date: Sun, 1 Jun 2025 00:30:49 +0800
+Subject: [PATCH] fix prefix
+
+---
+ msvc/Makefile       | 4 ++++
+ msvc/tests/Makefile | 7 ++++++-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/msvc/Makefile b/msvc/Makefile
+index 7b2f540..5c33842 100644
+--- a/msvc/Makefile
++++ b/msvc/Makefile
+@@ -157,7 +157,11 @@ DEF        = ecl-threads.def
+ # subdirectories of this directory.  The default values for many of
+ # the variables below are expressed in terms of this one, so you may
+ # not need to change them.  This defaults to /usr/local.
++!if "$(PREFIX)" != ""
++prefix=$(PREFIX)
++!else
+ prefix=%CD%\package
++!endif
+ exec_prefix=$(prefix)
+ bindir=$(prefix)
+ libdir=$(prefix)
+diff --git a/msvc/tests/Makefile b/msvc/tests/Makefile
+index 65f0984..ffb6cf7 100644
+--- a/msvc/tests/Makefile
++++ b/msvc/tests/Makefile
+@@ -1,6 +1,11 @@
+ top_srcdir=..\..
++!if "$(PREFIX)" != ""
++ECLDIR=$(PREFIX)/
++ECL=$(PREFIX)\ecl.exe
++!else
+ ECLDIR=../package/
+ ECL=..\package\ecl.exe
++!endif
+ 
+ .PHONY: all
+ 
+@@ -19,4 +24,4 @@ config.lsp: $(top_srcdir)\src\tests\config.lsp.in ..\c\cut.exe Makefile
+ 	  < $(top_srcdir)\src\tests\config.lsp.in > config.lsp
+ 
+ clean:
+-	rd /s /q temporary
++	if exist temporary rd /s /q temporary
+-- 
+2.49.0.windows.1
+
