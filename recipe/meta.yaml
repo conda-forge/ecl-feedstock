@@ -1,4 +1,4 @@
-{% set version = "24.5.10" %}
+{% set version = "26.3.27" %}
 {% set name = "ecl" %}
 
 package:
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://common-lisp.net/project/ecl/static/files/release/{{ name }}-{{ version }}.tgz
-  sha256: e4ea65bb1861e0e495386bfa8bc673bd014e96d3cf9d91e9038f91435cbe622b
+  sha256: 416d5707bf11d2b3d8d33d6791419a786e4cc59ac0cc3ec505ee59b51a9f5c9a
   patches:
     # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
     - write_error.patch
     - fix-prefix.patch
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   build:
@@ -30,7 +30,7 @@ requirements:
     # On a major upgrade, this cannot be satisfied. When this fails, we merge
     # the PR that builds the native ecl and then restart the CI once the native
     # versions are uploaded.
-    - ecl 24.*  # [build_platform != target_platform]
+    - ecl 26.*  # [build_platform != target_platform]
   host:
     - gmp
     - readline  # [unix]
