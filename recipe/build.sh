@@ -28,7 +28,6 @@ chmod +x configure
         --prefix="$PREFIX" \
         --libdir="$PREFIX/lib" \
         --with-gmp-prefix="$PREFIX" \
-        --disable-threads \
         --enable-unicode=yes
 
 # Before running make we touch build/TAGS so its building process is never triggered
