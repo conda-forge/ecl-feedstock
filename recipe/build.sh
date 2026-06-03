@@ -1,8 +1,5 @@
 #!/bin/bash
 # Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/libffi
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/bdwgc
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/bdwgc/libatomic_ops
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/gmp
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./src
 
@@ -28,6 +25,11 @@ chmod +x configure
         --prefix="$PREFIX" \
         --libdir="$PREFIX/lib" \
         --with-gmp-prefix="$PREFIX" \
+        --with-libgc-prefix="$PREFIX" \
+        --with-libffi-prefix="$PREFIX" \
+        --enable-boehm=system \
+        --enable-libatomic=system \
+        --with-dffi=system \
         --enable-unicode=yes
 
 # Before running make we touch build/TAGS so its building process is never triggered

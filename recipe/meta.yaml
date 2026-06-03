@@ -15,6 +15,8 @@ source:
 
 build:
   number: 0
+  ignore_run_exports:
+    - libatomic_ops  # [unix]
 
 requirements:
   build:
@@ -34,11 +36,13 @@ requirements:
   host:
     - gmp
     - readline  # [unix]
-    - bdw-gc
+    - bdw-gc  # [unix]
+    - libatomic_ops  # [unix]
+    - libffi  # [unix]
   run:
     - gmp
     - readline  # [unix]
-    - {{ pin_compatible('bdw-gc') }}
+    - {{ pin_compatible('bdw-gc') }}  # [unix]
 
 test:
   commands:
@@ -48,6 +52,7 @@ test:
     - test -f ${PREFIX}/include/{{ name }}/{{ name }}.h  # [unix]
     - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
+    - ecl --eval "(assert (member :boehm-gc *features*))" --eval "(assert (member :dffi *features*))" --eval "(quit)"  # [unix]
     - ecl --version
 
 about:
