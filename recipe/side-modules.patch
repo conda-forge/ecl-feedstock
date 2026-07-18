@@ -1,8 +1,9 @@
-diff --git a/src/util/side-modules.lsp b/src/util/side-modules.lsp
-new file mode 100644
-index 0000000000000000000000000000000000000000..90446f450506459af8598d5eaf0c848b934e27a6
+Backport of https://gitlab.com/embeddable-common-lisp/ecl/-/commit/59de50b52380132d44bfa05f573544cba0a8c65f
+Paths are prefix-less (no a/ b/) because conda-build cannot guess the strip
+level of a patch that only creates a new file and falls back to -p0.
+
 --- /dev/null
-+++ b/src/util/side-modules.lsp
++++ src/util/side-modules.lsp
 @@ -0,0 +1,56 @@
 +;;; A factory for setting extra locations to search for modules.
 +;;;
