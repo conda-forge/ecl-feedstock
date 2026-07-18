@@ -16,6 +16,9 @@ source:
 build:
   number: 0
   ignore_run_exports:
+    # libatomic_ops in host is only needed for its headers at build time
+    # (--enable-libatomic=system); ecl does not link against it, so its
+    # run_export would add a spurious runtime dependency.
     - libatomic_ops  # [unix]
 
 requirements:
