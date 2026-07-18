@@ -1,8 +1,5 @@
 #!/bin/bash
 # Get an updated config.sub and config.guess
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/libffi
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/bdwgc
-cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/bdwgc/libatomic_ops
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./src/gmp
 cp $BUILD_PREFIX/share/gnuconfig/config.* ./src
 
@@ -28,11 +25,20 @@ chmod +x configure
         --prefix="$PREFIX" \
         --libdir="$PREFIX/lib" \
         --with-gmp-prefix="$PREFIX" \
-        --disable-threads \
-        --enable-unicode=yes
+        --with-libgc-prefix="$PREFIX" \
+        --with-libffi-prefix="$PREFIX" \
+        --enable-boehm=system \
+        --enable-libatomic=system \
+        --with-dffi=system \
+        --enable-unicode=yes \
+        --with-extra-files="$SRC_DIR/src/util/side-modules.lsp"
 
 # Before running make we touch build/TAGS so its building process is never triggered
 touch build/TAGS
+
+# Default search path for (require :<module>), baked into the image by
+# side-modules.patch; can be overridden at runtime with the same variable.
+export ECL_SIDE_MODULES_PATH="$PREFIX/lib/ecl-$PKG_VERSION"
 
 make -j${CPU_COUNT}
 make install
