@@ -30,10 +30,15 @@ chmod +x configure
         --enable-boehm=system \
         --enable-libatomic=system \
         --with-dffi=system \
-        --enable-unicode=yes
+        --enable-unicode=yes \
+        --with-extra-files="$SRC_DIR/src/util/side-modules.lsp"
 
 # Before running make we touch build/TAGS so its building process is never triggered
 touch build/TAGS
+
+# Default search path for (require :<module>), baked into the image by
+# side-modules.patch; can be overridden at runtime with the same variable.
+export ECL_SIDE_MODULES_PATH="$PREFIX/lib/ecl-$PKG_VERSION"
 
 make -j${CPU_COUNT}
 make install

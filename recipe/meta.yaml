@@ -12,6 +12,11 @@ source:
     # from https://github.com/sagemath/sage/blob/master/build/pkgs/ecl/patches/write_error.patch
     - write_error.patch
     - fix-prefix.patch
+    # Backport of https://gitlab.com/embeddable-common-lisp/ecl/-/commit/59de50b52380132d44bfa05f573544cba0a8c65f
+    # so that (require :<module>) finds third-party modules (e.g. maxima.fas)
+    # in the directories listed in ECL_SIDE_MODULES_PATH (see build.sh).
+    # Remove with the next upstream release, which includes this file.
+    - side-modules.patch
 
 build:
   number: 0
@@ -56,6 +61,12 @@ test:
     - test -f ${PREFIX}/lib/lib{{ name }}.dylib  # [osx]
     - test -f ${PREFIX}/lib/lib{{ name }}.so     # [linux]
     - ecl --eval "(assert (member :boehm-gc *features*))" --eval "(assert (member :dffi *features*))" --eval "(quit)"  # [unix]
+    # verify that the side-modules search path baked in at build time (see
+    # side-modules.patch) survived conda's prefix relocation
+    - ecl --eval "(assert (equal si::*build-time-side-module-pathnames* (list (parse-namestring \"$PREFIX/lib/ecl-{{ version }}/\"))))" --eval "(quit)"  # [unix]
+    # verify that (require :<module>) finds modules via ECL_SIDE_MODULES_PATH
+    - echo '(provide "SIDE-MODULES-TEST")' > side-modules-test.lsp  # [unix]
+    - ECL_SIDE_MODULES_PATH=$PWD ecl --eval "(require :side-modules-test)" --eval "(assert (member \"SIDE-MODULES-TEST\" *modules* :test (function string=)))" --eval "(quit)"  # [unix]
     - ecl --version
 
 about:
