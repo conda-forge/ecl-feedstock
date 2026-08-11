@@ -19,7 +19,7 @@ source:
     - side-modules.patch
 
 build:
-  number: 0
+  number: 1
   ignore_run_exports:
     # libatomic_ops in host is only needed for its headers at build time
     # (--enable-libatomic=system); ecl does not link against it, so its
