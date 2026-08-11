@@ -42,7 +42,7 @@ export ECL_SIDE_MODULES_PATH="$PREFIX/lib/ecl-$PKG_VERSION"
 
 make -j${CPU_COUNT}
 make install
-if [[ "${CONDA_BUILD_CROSS_COMPILATION}" != "1" ]]; then
+if [[ "${CONDA_BUILD_CROSS_COMPILATION:-}" != "1" || "${CROSSCOMPILING_EMULATOR}" != "" ]]; then
   make check
 fi
 
